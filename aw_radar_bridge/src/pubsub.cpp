@@ -19,8 +19,8 @@ class PubSub : public rclcpp::Node
     : Node("aw_radar_pubsub")
     {
       subscription_ = this->create_subscription<std_msgs::msg::String>(
-        // "/sensor/radar/bumper_front_centre/far/image", 10, 
-        "/input", 10, 
+        // "/sensor/radar/bumper_front_centre/far/image", 10,
+        "/input", 10,
         std::bind(&PubSub::topic_CB, this, _1));
       publisher_ = this->create_publisher<std_msgs::msg::String>(
         "/output", 10);
