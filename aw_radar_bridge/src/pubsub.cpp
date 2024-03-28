@@ -1,10 +1,6 @@
-// #include <chrono>
-// #include <functional>
 #include <memory>
 #include <string>
-
 #include "rclcpp/rclcpp.hpp"
-// #include "std_msgs/msg/string.hpp"
 
 #include "ecal_to_ros/msg/radar_detection.hpp"
 #include "ecal_to_ros/msg/radar_detection_image.hpp"
@@ -14,9 +10,6 @@ using namespace std::chrono_literals;
 using namespace ecal_to_ros::msg;
 using namespace radar_msgs::msg;
 using std::placeholders::_1;
-
-/* This example creates a subclass of Node and uses std::bind() to register a
-* member function as a callback from the timer. */
 
 class PubSub : public rclcpp::Node
 {
@@ -42,9 +35,9 @@ class PubSub : public rclcpp::Node
     {
       auto radar_msg = RadarScan();
       radar_msg.header = conti_msg.header;
-      radar_msg.header.frame_id = frame_id_;      
+      radar_msg.header.frame_id = frame_id_;
 
-      for (std::vector<RadarDetection>::const_iterator 
+      for (std::vector<RadarDetection>::const_iterator
         i = conti_msg.a_radardetectionlist.begin();
         i != conti_msg.a_radardetectionlist.end(); ++i)
       {

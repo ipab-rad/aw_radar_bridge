@@ -1,4 +1,44 @@
-FROM ros:humble-ros-base-jammy
+FROM ros:humble-ros-base-jammy AS base
+
+# Install key dependencies
+RUN apt update \
+    && DEBIAN_FRONTEND=noninteractive \
+        apt -y --quiet --no-install-recommends install \
+        # Install ROS msg dependencies
+        ros-$ROS_DISTRO-radar-msgs \
+        ros-$ROS_DISTRO-sensor-msgs \
+    && rm -rf /var/lib/apt/lists/*
+
+# Setup ROS workspace folders
+ENV ROS_WS /opt/ros_ws
+RUN mkdir -p $ROS_WS/src
+WORKDIR $ROS_WS
+# Also create ecal_to_ros pkg-to-be folder
+RUN mkdir -p $ROS_WS/src/ecal_to_ros
+
+# -----------------------------------------------------------------------
+
+FROM base AS build
+
+# Copy ROS2 msg files and bridge code over
+ADD ecal_to_ros/ros2/ $ROS_WS/src/ecal_to_ros/
+ADD aw_radar_bridge $ROS_WS/src/aw_radar_bridge
+
+# Source ROS2 setup for dependencies and build our code
+RUN . /opt/ros/$ROS_DISTRO/setup.sh && \
+    colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release
+
+# Add command to docker entrypoint to source newly compiled code when running docker container
+RUN sed --in-place --expression \
+      '$isource "$ROS_WS/install/setup.bash"' \
+      /ros_entrypoint.sh
+
+# Launch ros package
+CMD ["ros2", "launch", "aw_radar_bridge", "aw_radar_bridge.launch.xml"]
+
+# -----------------------------------------------------------------------
+
+FROM base AS dev
 
 # Install basic dev tools (And clean apt cache afterwards)
 RUN apt update \
@@ -10,32 +50,13 @@ RUN apt update \
         inetutils-ping \
         # Bash auto-completion for convenience
         bash-completion \
-        # Install ROS msg dependencies
-        ros-$ROS_DISTRO-radar-msgs \
-        ros-$ROS_DISTRO-sensor-msgs \
-        ros-$ROS_DISTRO-std-msgs \
     && rm -rf /var/lib/apt/lists/*
 
-# Setup ROS workspace folder
-ENV ROS_WS /opt/ros_ws
-RUN mkdir -p $ROS_WS/src
-WORKDIR $ROS_WS
+# Add sourcing local workspace command to bashrc for convenience when running interactively
+RUN echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> /root/.bashrc
 
-# Setup ROS2 msgs workspace folder and copy files over
-RUN mkdir -p $ROS_WS/src/ecal_to_ros
-ADD ecal_to_ros/ros2/ $ROS_WS/src/ecal_to_ros/
+# Add colcon build alias for convenience
+RUN echo 'alias colcon_build="colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release && source install/setup.bash"' >> /root/.bashrc
 
-# Source ROS2 setup for dependencies and build our code
-RUN . /opt/ros/$ROS_DISTRO/setup.sh && \
-    colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release
-
-# Add command to docker entrypoint to source newly compiled code when running docker container
-# RUN sed --in-place --expression \
-#       '$isource "$ROS_WS/install/setup.bash"' \
-#       /ros_entrypoint.sh
-
-# # Add sourcing local workspace command to bashrc for convenience when running interactively
-# RUN echo "source $ROS_WS/install/setup.bash" >> /root/.bashrc
-
-# launch ros package
-# CMD TODO
+# Enter bash for development
+CMD ["bash"]
