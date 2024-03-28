@@ -11,11 +11,9 @@
 
   <depend>rclcpp</depend>
 
-  <!-- <depend>ecal_to_ros</depend> -->
+  <depend>ecal_to_ros</depend>
   <depend>radar_msgs</depend>
   <depend>sensor_msgs</depend>
-
-  <depend>std_msgs</depend>
 
   <export>
     <build_type>ament_cmake</build_type>

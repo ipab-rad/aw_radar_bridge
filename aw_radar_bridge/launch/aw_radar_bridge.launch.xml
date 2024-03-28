@@ -1,5 +1,84 @@
 <launch>
 
-<!-- TODO -->
+    <node pkg="aw_radar_bridge" exec="pubsub" name="radar_bumper_front_centre_far_pubsub">
+        <param name="frame_id" value="radar_bumper_front_centre_mount"/>
+        <param name="input_topic" value="/sensor/radar/bumper_front_centre/far/image"/>
+        <param name="output_topic" value="/output/radar/bumper_front_centre/far/image"/>
+    </node>
+    <node pkg="aw_radar_bridge" exec="pubsub" name="radar_bumper_front_centre_near_pubsub">
+        <param name="frame_id" value="radar_bumper_front_centre_mount"/>
+        <param name="input_topic" value="/sensor/radar/bumper_front_centre/near/image"/>
+        <param name="output_topic" value="/output/radar/bumper_front_centre/near/image"/>
+    </node>
+    <node pkg="aw_radar_bridge" exec="pubsub" name="radar_bumper_front_left_far_pubsub">
+        <param name="frame_id" value="radar_bumper_front_left_mount"/>
+        <param name="input_topic" value="/sensor/radar/bumper_front_left/far/image"/>
+        <param name="output_topic" value="/output/radar/bumper_front_left/far/image"/>
+    </node>
+    <node pkg="aw_radar_bridge" exec="pubsub" name="radar_bumper_front_left_near_pubsub">
+        <param name="frame_id" value="radar_bumper_front_left_mount"/>
+        <param name="input_topic" value="/sensor/radar/bumper_front_left/near/image"/>
+        <param name="output_topic" value="/output/radar/bumper_front_left/near/image"/>
+    </node>
+    <node pkg="aw_radar_bridge" exec="pubsub" name="radar_bumper_front_right_far_pubsub">
+        <param name="frame_id" value="radar_bumper_front_right_mount"/>
+        <param name="input_topic" value="/sensor/radar/bumper_front_right/far/image"/>
+        <param name="output_topic" value="/output/radar/bumper_front_right/far/image"/>
+    </node>
+    <node pkg="aw_radar_bridge" exec="pubsub" name="radar_bumper_front_right_near_pubsub">
+        <param name="frame_id" value="radar_bumper_front_right_mount"/>
+        <param name="input_topic" value="/sensor/radar/bumper_front_right/near/image"/>
+        <param name="output_topic" value="/output/radar/bumper_front_right/near/image"/>
+    </node>
+    <node pkg="aw_radar_bridge" exec="pubsub" name="radar_bumper_rear_centre_far_pubsub">
+        <param name="frame_id" value="radar_bumper_rear_centre_mount"/>
+        <param name="input_topic" value="/sensor/radar/bumper_rear_centre/far/image"/>
+        <param name="output_topic" value="/output/radar/bumper_rear_centre/far/image"/>
+    </node>
+    <node pkg="aw_radar_bridge" exec="pubsub" name="radar_bumper_rear_centre_near_pubsub">
+        <param name="frame_id" value="radar_bumper_rear_centre_mount"/>
+        <param name="input_topic" value="/sensor/radar/bumper_rear_centre/near/image"/>
+        <param name="output_topic" value="/output/radar/bumper_rear_centre/near/image"/>
+    </node>
+    <node pkg="aw_radar_bridge" exec="pubsub" name="radar_roof_left_front_far_pubsub">
+        <param name="frame_id" value="radar_roof_left_front_mount"/>
+        <param name="input_topic" value="/sensor/radar/roof_left_front/far/image"/>
+        <param name="output_topic" value="/output/radar/roof_left_front/far/image"/>
+    </node>
+    <node pkg="aw_radar_bridge" exec="pubsub" name="radar_roof_left_front_near_pubsub">
+        <param name="frame_id" value="radar_roof_left_front_mount"/>
+        <param name="input_topic" value="/sensor/radar/roof_left_front/near/image"/>
+        <param name="output_topic" value="/output/radar/roof_left_front/near/image"/>
+    </node>
+    <node pkg="aw_radar_bridge" exec="pubsub" name="radar_roof_left_rear_far_pubsub">
+        <param name="frame_id" value="radar_roof_left_rear_mount"/>
+        <param name="input_topic" value="/sensor/radar/roof_left_rear/far/image"/>
+        <param name="output_topic" value="/output/radar/roof_left_rear/far/image"/>
+    </node>
+    <node pkg="aw_radar_bridge" exec="pubsub" name="radar_roof_left_rear_near_pubsub">
+        <param name="frame_id" value="radar_roof_left_rear_mount"/>
+        <param name="input_topic" value="/sensor/radar/roof_left_rear/near/image"/>
+        <param name="output_topic" value="/output/radar/roof_left_rear/near/image"/>
+    </node>
+    <node pkg="aw_radar_bridge" exec="pubsub" name="radar_roof_right_front_far_pubsub">
+        <param name="frame_id" value="radar_roof_right_front_mount"/>
+        <param name="input_topic" value="/sensor/radar/roof_right_front/far/image"/>
+        <param name="output_topic" value="/output/radar/roof_right_front/far/image"/>
+    </node>
+    <node pkg="aw_radar_bridge" exec="pubsub" name="radar_roof_right_front_near_pubsub">
+        <param name="frame_id" value="radar_roof_right_front_mount"/>
+        <param name="input_topic" value="/sensor/radar/roof_right_front/near/image"/>
+        <param name="output_topic" value="/output/radar/roof_right_front/near/image"/>
+    </node>
+    <node pkg="aw_radar_bridge" exec="pubsub" name="radar_roof_right_rear_far_pubsub">
+        <param name="frame_id" value="radar_roof_right_rear_mount"/>
+        <param name="input_topic" value="/sensor/radar/roof_right_rear/far/image"/>
+        <param name="output_topic" value="/output/radar/roof_right_rear/far/image"/>
+    </node>
+    <node pkg="aw_radar_bridge" exec="pubsub" name="radar_roof_right_rear_near_pubsub">
+        <param name="frame_id" value="radar_roof_right_rear_mount"/>
+        <param name="input_topic" value="/sensor/radar/roof_right_rear/near/image"/>
+        <param name="output_topic" value="/output/radar/roof_right_rear/near/image"/>
+    </node>
 
 </launch>

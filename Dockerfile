@@ -21,9 +21,13 @@ ENV ROS_WS /opt/ros_ws
 RUN mkdir -p $ROS_WS/src
 WORKDIR $ROS_WS
 
-# Source ROS setup for dependencies and build our code
-# RUN . /opt/ros/$ROS_DISTRO/setup.sh \
-#     && colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release
+# Setup ROS2 msgs workspace folder and copy files over
+RUN mkdir -p $ROS_WS/src/ecal_to_ros
+ADD ecal_to_ros/ros2/ $ROS_WS/src/ecal_to_ros/
+
+# Source ROS2 setup for dependencies and build our code
+RUN . /opt/ros/$ROS_DISTRO/setup.sh && \
+    colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release
 
 # Add command to docker entrypoint to source newly compiled code when running docker container
 # RUN sed --in-place --expression \
