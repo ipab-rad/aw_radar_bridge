@@ -10,19 +10,16 @@ RUN apt update \
     && rm -rf /var/lib/apt/lists/*
 
 # Setup ROS workspace folders
-ENV ROS_WS /opt/ros_ws
-RUN mkdir -p $ROS_WS/src
+ENV ROS_WS=/opt/ros_ws
 WORKDIR $ROS_WS
-# Also create ecal_to_ros pkg-to-be folder
-RUN mkdir -p $ROS_WS/src/ecal_to_ros
+
+# Copy ROS2 msg files and bridge code over
+COPY ecal_to_ros/ros2/ src/ecal_to_ros/
+COPY aw_radar_bridge  src/aw_radar_bridge
 
 # -----------------------------------------------------------------------
 
 FROM base AS prebuilt
-
-# Copy ROS2 msg files and bridge code over
-ADD ecal_to_ros/ros2/ $ROS_WS/src/ecal_to_ros/
-ADD aw_radar_bridge $ROS_WS/src/aw_radar_bridge
 
 # Source ROS2 setup for dependencies and build our code
 RUN . /opt/ros/$ROS_DISTRO/setup.sh && \
