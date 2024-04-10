@@ -18,7 +18,7 @@ RUN mkdir -p $ROS_WS/src/ecal_to_ros
 
 # -----------------------------------------------------------------------
 
-FROM base AS build
+FROM base AS prebuilt
 
 # Copy ROS2 msg files and bridge code over
 ADD ecal_to_ros/ros2/ $ROS_WS/src/ecal_to_ros/
@@ -32,9 +32,6 @@ RUN . /opt/ros/$ROS_DISTRO/setup.sh && \
 RUN sed --in-place --expression \
       '$isource "$ROS_WS/install/setup.bash"' \
       /ros_entrypoint.sh
-
-# Launch ros package
-CMD ["ros2", "launch", "aw_radar_bridge", "aw_radar_bridge.launch.xml"]
 
 # -----------------------------------------------------------------------
 
@@ -60,3 +57,11 @@ RUN echo 'alias colcon_build="colcon build --symlink-install --cmake-args -DCMAK
 
 # Enter bash for development
 CMD ["bash"]
+
+# -----------------------------------------------------------------------
+
+# Note: Ideally this runtime stage should inherit from base and only copy relevant artifacts to it
+FROM prebuilt AS runtime
+
+# Launch ros package
+CMD ["ros2", "launch", "aw_radar_bridge", "aw_radar_bridge.launch.xml"]
