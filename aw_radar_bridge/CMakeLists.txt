@@ -17,10 +17,16 @@ find_package(ecal_to_ros REQUIRED)
 find_package(radar_msgs REQUIRED)
 find_package(std_msgs REQUIRED)
 
-add_executable(pubsub src/pubsub.cpp)
-ament_target_dependencies(pubsub rclcpp ecal_to_ros radar_msgs std_msgs)
+add_executable(radar_bridge_node src/radar_bridge_node.cpp)
 
-install(TARGETS pubsub DESTINATION lib/${PROJECT_NAME})
+ament_target_dependencies(radar_bridge_node 
+  rclcpp 
+  ecal_to_ros 
+  radar_msgs 
+  std_msgs
+)
+
+install(TARGETS radar_bridge_node DESTINATION lib/${PROJECT_NAME})
 
 install(DIRECTORY launch
   DESTINATION share/${PROJECT_NAME}
