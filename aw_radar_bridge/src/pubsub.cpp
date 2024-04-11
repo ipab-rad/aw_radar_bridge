@@ -39,7 +39,7 @@ public:
     /// Get radar output topic
     output_topic_ = this->declare_parameter("output_topic", "radar_output");
 
-    // Defin publisher for converted Radar msgs
+    // Define publisher for converted Radar msgs
     publisher_ = this->create_publisher<RadarScan>(output_topic_, 10);
   }
 
@@ -78,7 +78,7 @@ private:
   /// Radar I/O and frame id str's
   std::string input_topic_, output_topic_, frame_id_;
 
-  /// Subscritpion for Contintal's Radar msg
+  /// Subscription for Contintal's Radar msg
   rclcpp::Subscription<RadarDetectionImage>::SharedPtr subscription_;
 
   /// Publisher for ROS perception Radar msg
@@ -92,6 +92,6 @@ int main(int argc, char *argv[])
   rclcpp::spin(std::make_shared<RadarBridge>());
 
   rclcpp::shutdown();
-  
+
   return 0;
 }
