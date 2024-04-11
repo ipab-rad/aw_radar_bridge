@@ -1,7 +1,7 @@
 #!/bin/bash
-###############################################################################
-# Build docker dev stage and add local code for live development              #
-###############################################################################
+# ----------------------------------------------------------------
+# Build docker dev stage and add local code for live development 
+# ----------------------------------------------------------------
 
 # Build docker image up to dev stage
 DOCKER_BUILDKIT=1 docker build \

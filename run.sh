@@ -1,7 +1,7 @@
 #!/bin/bash
-######################################################################################
-# Build docker image and run ROS code either for runtime or interactively with bash  #
-######################################################################################
+# ---------------------------------------------------------------------------
+# Build docker image and run ROS code for runtime or interactively with bash
+# ---------------------------------------------------------------------------
 
 # Initialise CMD as empty
 CMD=""
