@@ -13,22 +13,17 @@ RUN apt update \
 ENV ROS_WS=/opt/ros_ws
 WORKDIR $ROS_WS
 
-# Copy ROS2 msg files and bridge code over
-COPY ecal_to_ros/ros2/ src/ecal_to_ros/
-COPY aw_radar_bridge  src/aw_radar_bridge
-
 # -----------------------------------------------------------------------
 
 FROM base AS prebuilt
 
+# Copy ROS2 msg files and bridge code over
+COPY ecal_to_ros/ros2/ src/ecal_to_ros/
+COPY aw_radar_bridge  src/aw_radar_bridge
+
 # Source ROS2 setup for dependencies and build our code
 RUN . /opt/ros/$ROS_DISTRO/setup.sh && \
-    colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release
-
-# Add command to docker entrypoint to source newly compiled code when running docker container
-RUN sed --in-place --expression \
-      '$isource "$ROS_WS/install/setup.bash"' \
-      /ros_entrypoint.sh
+    colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release
 
 # -----------------------------------------------------------------------
 
@@ -57,8 +52,14 @@ CMD ["bash"]
 
 # -----------------------------------------------------------------------
 
-# Note: Ideally this runtime stage should inherit from base and only copy relevant artifacts to it
-FROM prebuilt AS runtime
+FROM base AS runtime
+
+COPY --from=prebuilt $ROS_WS/install $ROS_WS/install
+
+# Add command to docker entrypoint to source newly compiled code when running docker container
+RUN sed --in-place --expression \
+      '$isource "$ROS_WS/install/setup.bash"' \
+      /ros_entrypoint.sh
 
 # Launch ros package
 CMD ["ros2", "launch", "aw_radar_bridge", "aw_radar_bridge.launch.xml"]
