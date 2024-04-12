@@ -16,17 +16,34 @@ find_package(rclcpp REQUIRED)
 find_package(ecal_to_ros REQUIRED)
 find_package(radar_msgs REQUIRED)
 find_package(std_msgs REQUIRED)
+find_package(rclcpp_components REQUIRED)
 
-add_executable(radar_bridge_node src/radar_bridge_node.cpp)
+add_library(radar_bridge_node_component SHARED src/radar_bridge_node.cpp)
 
-ament_target_dependencies(radar_bridge_node 
+ament_target_dependencies(radar_bridge_node_component 
   rclcpp 
   ecal_to_ros 
   radar_msgs 
   std_msgs
+  rclcpp_components
 )
 
-install(TARGETS radar_bridge_node DESTINATION lib/${PROJECT_NAME})
+#  Declare component
+rclcpp_components_register_node(
+    radar_bridge_node_component
+    PLUGIN "sensor::RadarBridge"
+    EXECUTABLE radar_bridge_node
+)
+
+# Install component
+ament_export_targets(export_radar_bridge_node_component)
+install(TARGETS radar_bridge_node_component
+        EXPORT export_radar_bridge_node_component
+        ARCHIVE DESTINATION lib
+        LIBRARY DESTINATION lib
+        RUNTIME DESTINATION bin
+)
+
 
 install(DIRECTORY launch
   DESTINATION share/${PROJECT_NAME}
