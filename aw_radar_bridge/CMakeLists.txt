@@ -20,10 +20,10 @@ find_package(rclcpp_components REQUIRED)
 
 add_library(radar_bridge_node_component SHARED src/radar_bridge_node.cpp)
 
-ament_target_dependencies(radar_bridge_node_component 
-  rclcpp 
-  ecal_to_ros 
-  radar_msgs 
+ament_target_dependencies(radar_bridge_node_component
+  rclcpp
+  ecal_to_ros
+  radar_msgs
   std_msgs
   rclcpp_components
 )

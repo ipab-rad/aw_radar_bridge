@@ -40,7 +40,7 @@
                 <param name="input_topic" value="/sensor/radar/bumper_front_right/near/image"/>
                 <param name="output_topic" value="/output/radar/bumper_front_right/near/image"/>
 			</composable_node>
-            
+
             <composable_node pkg="aw_radar_bridge" plugin="sensor::RadarBridge" name="radar_bumper_rear_centre_far" namespace="">
                 <param name="frame_id" value="radar_bumper_rear_centre_mount"/>
                 <param name="input_topic" value="/sensor/radar/bumper_rear_centre/far/image"/>
