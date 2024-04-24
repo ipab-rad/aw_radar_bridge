@@ -17,6 +17,6 @@ DOCKER_BUILDKIT=1 docker build \
 -f Dockerfile --target runtime .
 
 # Run docker image without volumes
-docker run -it --rm --net host \
+docker run -it --rm --net host --privileged \
 -v /dev/shm:/dev/shm \
 aw_radar_bridge_humble $CMD

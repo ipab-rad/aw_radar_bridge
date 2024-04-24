@@ -9,7 +9,7 @@ DOCKER_BUILDKIT=1 docker build \
 -f Dockerfile --target dev .
 
 # Run docker image with local code volumes for development
-docker run -it --rm --net host \
+docker run -it --rm --net host --privileged \
 -v /dev/shm:/dev/shm \
 -v ./ecal_to_ros/ros2:/opt/ros_ws/src/ecal_to_ros \
 -v ./aw_radar_bridge:/opt/ros_ws/src/aw_radar_bridge \
