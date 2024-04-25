@@ -5,14 +5,15 @@
   <version>0.0.0</version>
   <description>Bridge from internal radar msgs to Autoware radar msgs</description>
   <maintainer email="alex.bordallo@ed.ac.uk">Alejandro Bordallo</maintainer>
+  <maintainer email="hcruzgo@ed.ac.uk">Hector Cruz</maintainer>
   <license>Apache-2.0</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
-  <depend>rclcpp</depend>
-
   <depend>ecal_to_ros</depend>
   <depend>radar_msgs</depend>
+  <depend>rclcpp</depend>
+  <depend>rclcpp_components</depend>
   <depend>sensor_msgs</depend>
 
   <export>
