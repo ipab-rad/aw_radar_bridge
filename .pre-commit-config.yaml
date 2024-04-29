@@ -51,7 +51,7 @@ repos:
       args: ["--ignore=D100,D101,D102,D103,D104,D105,D106,D107,D203,D212,D404"]
 
   - repo: https://github.com/psf/black
-    rev: 24.4.0
+    rev: 24.4.2
     hooks:
       - id: black
         args: ["--line-length=99"]
@@ -158,7 +158,7 @@ repos:
 
   # Dockerfiles
   - repo: https://github.com/AleksaC/hadolint-py
-    rev: v2.12.1-beta
+    rev: v2.12.1b3
     hooks:
       - id: hadolint
         args: ['--ignore=DL3008']
