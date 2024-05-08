@@ -43,24 +43,11 @@ repos:
     -   id: pyupgrade
         args: [--py36-plus]
 
-  # PyDocStyle
-  - repo: https://github.com/PyCQA/pydocstyle
-    rev: 6.3.0
-    hooks:
-    - id: pydocstyle
-      args: ["--ignore=D100,D101,D102,D103,D104,D105,D106,D107,D203,D212,D404"]
-
   - repo: https://github.com/psf/black
-    rev: 24.4.0
+    rev: 24.4.2
     hooks:
       - id: black
-        args: ["--line-length=99"]
-
-  - repo: https://github.com/pycqa/flake8
-    rev: 7.0.0
-    hooks:
-    - id: flake8
-      args: ["--extend-ignore=E501"]
+        args: ["--line-length=79", -S]
 
   # CPP hooks
   - repo: https://github.com/pre-commit/mirrors-clang-format
@@ -158,7 +145,7 @@ repos:
 
   # Dockerfiles
   - repo: https://github.com/AleksaC/hadolint-py
-    rev: v2.12.1-beta
+    rev: v2.12.1b3
     hooks:
       - id: hadolint
         args: ['--ignore=DL3008']
