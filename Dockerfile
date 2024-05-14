@@ -7,11 +7,16 @@ RUN apt-get update \
         # Install ROS msg dependencies
         ros-"$ROS_DISTRO"-radar-msgs \
         ros-"$ROS_DISTRO"-sensor-msgs \
+        # Install Cyclone DDS ROS RMW
+        ros-"$ROS_DISTRO"-rmw-cyclonedds-cpp \
     && rm -rf /var/lib/apt/lists/*
 
 # Setup ROS workspace folders
 ENV ROS_WS=/opt/ros_ws
 WORKDIR $ROS_WS
+
+# Set cyclone DDS ROS RMW
+ENV RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
 
 # -----------------------------------------------------------------------
 
