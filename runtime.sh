@@ -13,10 +13,10 @@ fi
 
 # Build docker image only up to prebuilt stage
 DOCKER_BUILDKIT=1 docker build \
-    -t aw_radar_bridge_humble \
+    -t av_radar_bridge:latest \
     -f Dockerfile --target runtime .
 
 # Run docker image without volumes
 docker run -it --rm --net host --privileged \
     -v /dev/shm:/dev/shm \
-    aw_radar_bridge_humble $CMD
+    av_radar_bridge:latest $CMD
