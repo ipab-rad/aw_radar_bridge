@@ -2,6 +2,12 @@
 Changelog for package aw_radar_bridge
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Add cyclone DDS as ROS RMW  + configurate it to support high msg throughput
+* Avoid `dev.sh` override `latest` docker tag for convenience
+* Enable colorised ROS log
+
 1.0.0 (2024-05-01)
 ------------------
 * Initial Radar configuration PR (`#1 <https://github.com/ipab-rad/av_radar_bridge/issues/1>`_)
