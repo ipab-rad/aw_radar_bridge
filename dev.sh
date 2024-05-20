@@ -11,6 +11,7 @@ DOCKER_BUILDKIT=1 docker build \
 # Run docker image with local code volumes for development
 docker run -it --rm --net host --privileged \
     -v /dev/shm:/dev/shm \
+    -v /etc/localtime:/etc/localtime:ro \
     -v ./ecal_to_ros/ros2:/opt/ros_ws/src/ecal_to_ros \
     -v ./av_radar_bridge:/opt/ros_ws/src/av_radar_bridge \
     av_radar_bridge:latest-dev
