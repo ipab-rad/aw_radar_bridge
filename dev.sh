@@ -12,5 +12,5 @@ DOCKER_BUILDKIT=1 docker build \
 docker run -it --rm --net host --privileged \
     -v /dev/shm:/dev/shm \
     -v ./ecal_to_ros/ros2:/opt/ros_ws/src/ecal_to_ros \
-    -v ./aw_radar_bridge:/opt/ros_ws/src/aw_radar_bridge \
+    -v ./av_radar_bridge:/opt/ros_ws/src/av_radar_bridge \
     av_radar_bridge:latest-dev

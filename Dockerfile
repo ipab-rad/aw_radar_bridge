@@ -32,7 +32,7 @@ FROM base AS prebuilt
 
 # Copy ROS2 msg files and bridge code over
 COPY ecal_to_ros/ros2/ src/ecal_to_ros/
-COPY aw_radar_bridge  src/aw_radar_bridge
+COPY av_radar_bridge  src/av_radar_bridge
 
 # Source ROS2 setup for dependencies and build our code
 RUN . /opt/ros/"$ROS_DISTRO"/setup.sh && \
@@ -76,4 +76,4 @@ RUN sed --in-place --expression \
       /ros_entrypoint.sh
 
 # Launch ros package
-CMD ["ros2", "launch", "aw_radar_bridge", "aw_radar_bridge.launch.xml"]
+CMD ["ros2", "launch", "av_radar_bridge", "av_radar_bridge.launch.xml"]
