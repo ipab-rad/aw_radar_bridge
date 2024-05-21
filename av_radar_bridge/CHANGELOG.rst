@@ -1,6 +1,13 @@
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Changelog for package aw_radar_bridge
+Changelog for package av_radar_bridge
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Forthcoming
+-----------
+* Add cyclone DDS as ROS RMW  + configurate it to support high msg throughput
+* Avoid `dev.sh` override `latest` docker tag for convenience
+* Enable colorised ROS log
+* Synchronise host time with docker container
 
 1.0.0 (2024-05-01)
 ------------------

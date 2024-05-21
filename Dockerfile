@@ -7,11 +7,24 @@ RUN apt-get update \
         # Install ROS msg dependencies
         ros-"$ROS_DISTRO"-radar-msgs \
         ros-"$ROS_DISTRO"-sensor-msgs \
+        # Install Cyclone DDS ROS RMW
+        ros-"$ROS_DISTRO"-rmw-cyclonedds-cpp \
     && rm -rf /var/lib/apt/lists/*
 
 # Setup ROS workspace folders
 ENV ROS_WS=/opt/ros_ws
 WORKDIR $ROS_WS
+
+# Set cyclone DDS ROS RMW
+ENV RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
+
+COPY ./cyclone_dds.xml $ROS_WS/
+
+# Configure Cyclone cfg file
+ENV CYCLONEDDS_URI=file://${ROS_WS}/cyclone_dds.xml
+
+# Enable ROS log colorised output
+ENV RCUTILS_COLORIZED_OUTPUT=1
 
 # -----------------------------------------------------------------------
 
@@ -19,7 +32,7 @@ FROM base AS prebuilt
 
 # Copy ROS2 msg files and bridge code over
 COPY ecal_to_ros/ros2/ src/ecal_to_ros/
-COPY aw_radar_bridge  src/aw_radar_bridge
+COPY av_radar_bridge  src/av_radar_bridge
 
 # Source ROS2 setup for dependencies and build our code
 RUN . /opt/ros/"$ROS_DISTRO"/setup.sh && \
@@ -63,4 +76,4 @@ RUN sed --in-place --expression \
       /ros_entrypoint.sh
 
 # Launch ros package
-CMD ["ros2", "launch", "aw_radar_bridge", "aw_radar_bridge.launch.xml"]
+CMD ["ros2", "launch", "av_radar_bridge", "av_radar_bridge.launch.xml"]

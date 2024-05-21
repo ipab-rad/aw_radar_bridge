@@ -1,4 +1,4 @@
-# AW Radar Bridge
+# Av Radar Bridge
 
 Repo for bridging between internal Continental Radar msgs and standard ROS msgs.
 
@@ -36,5 +36,5 @@ Prepare a development setting that reflects local code modifications and simplif
 ./dev.sh
 ```
 
-- **Live Code Synchronization**: Mounts local `aw_radar_bridge` and `ecal_to_ros` directories with the container.
+- **Live Code Synchronization**: Mounts local `av_radar_bridge` and `ecal_to_ros` directories with the container.
 - **Convenience Alias**: The development container features a `colcon_build` alias, which simplifies the ROS2 build process. Executing `colcon_build` runs `colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release` and then sources the `setup.bash` to ensure the environment is updated with the latest build artifacts. This alias enhances productivity by combining build commands and environment setup into a single, easy command.
