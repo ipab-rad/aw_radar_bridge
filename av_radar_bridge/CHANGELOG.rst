@@ -2,8 +2,8 @@
 Changelog for package av_radar_bridge
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.1.0 (2024-05-21)
+------------------
 * Add cyclone DDS as ROS RMW  + configurate it to support high msg throughput
 * Avoid `dev.sh` override `latest` docker tag for convenience
 * Enable colorised ROS log
